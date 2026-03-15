@@ -9,6 +9,7 @@ const uncertaintyTable = document.querySelector("#uncertainty-table");
 const architectureList = document.querySelector("#architecture-list");
 const architectureChipRow = document.querySelector("#architecture-chip-row");
 const neuroChipRow = document.querySelector("#neuro-chip-row");
+const performanceChipRow = document.querySelector("#performance-chip-row");
 const deviceChip = document.querySelector("#device-chip");
 const projectTitle = document.querySelector("#project-title");
 const scrollButtons = document.querySelectorAll("[data-scroll-target]");
@@ -18,6 +19,36 @@ const fullscreenButtons = document.querySelectorAll("[data-scene-fullscreen]");
 const charts = [];
 let neuroSceneStarted = false;
 let networkSceneStarted = false;
+
+function detectPerformanceProfile() {
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+  const saveData = navigator.connection?.saveData ?? false;
+  const lowCpu = (navigator.hardwareConcurrency ?? 8) <= 4;
+  const lowMemory = (navigator.deviceMemory ?? 8) <= 4;
+  const lowMotion = reducedMotion || saveData || lowCpu || lowMemory;
+
+  return {
+    lowMotion,
+    reducedMotion,
+    saveData,
+    lowCpu,
+    lowMemory,
+    fps: lowMotion ? 18 : 30,
+    maxDpr: lowMotion ? 1.1 : 1.5,
+    chartAnimation: lowMotion ? false : { duration: 420, easing: "easeOutQuad" },
+    lineTension: lowMotion ? 0.16 : 0.25,
+    pointRadius: lowMotion ? 2 : 3,
+    bubbleRadiusScale: lowMotion ? 16 : 22,
+    neuroNodesPerCluster: lowMotion ? 12 : 18,
+    neuroConnectionSpan: lowMotion ? 2 : 3,
+    neuroRingCount: lowMotion ? 2 : 3,
+    networkConnectionModulo: lowMotion ? 4 : 3,
+    showPulse: !lowMotion,
+    shadowBlur: lowMotion ? 0 : 18,
+  };
+}
+
+const performanceProfile = detectPerformanceProfile();
 
 function metricCard(label, value) {
   return `
@@ -98,7 +129,18 @@ function createChart(canvasId, config) {
   if (!canvas) {
     return null;
   }
-  return registerChart(new Chart(canvas, config));
+  const mergedConfig = {
+    ...config,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      devicePixelRatio: performanceProfile.maxDpr,
+      normalized: true,
+      animation: performanceProfile.chartAnimation,
+      ...config.options,
+    },
+  };
+  return registerChart(new Chart(canvas, mergedConfig));
 }
 
 function renderMetrics(payload) {
@@ -133,7 +175,7 @@ function renderArchitecture(payload) {
   const architecture = payload.architecture ?? {};
   const stages = architecture.stages ?? [];
   architectureList.innerHTML = stages
-    .map((stage) => `<li><strong>${stage.name}</strong>: ${stage.nodes} unidades no grupo ${stage.group}</li>`)
+    .map((stage) => `<li><strong>${stage.name}</strong>: ${stage.nodes} units in group ${stage.group}</li>`)
     .join("");
 
   architectureChipRow.innerHTML = [
@@ -149,6 +191,12 @@ function renderArchitecture(payload) {
     chip(`Temperature ${formatMetric(payload.temperature)}`),
     chip(`Entropy ${formatMetric(payload.metrics.mc_dropout_test?.mean_entropy)}`),
     chip(`ECE ${formatMetric(payload.metrics.calibrated_test?.ece ?? payload.metrics.mc_dropout_test?.ece)}`),
+  ].join("");
+
+  performanceChipRow.innerHTML = [
+    chip(performanceProfile.lowMotion ? "Auto low-motion mode" : "Full motion mode"),
+    chip(performanceProfile.reducedMotion ? "Reduced motion preference" : "Standard motion preference"),
+    chip(`Render ${performanceProfile.fps} fps target`),
   ].join("");
 
   deviceChip.textContent = `Device: ${payload.device ?? "unknown"}`;
@@ -170,8 +218,6 @@ function renderProbabilityCharts(payload) {
       ],
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
         y: { beginAtZero: true, max: 1, grid: { color: "rgba(16,33,44,0.08)" } },
@@ -194,8 +240,6 @@ function renderProbabilityCharts(payload) {
       ],
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
         y: { beginAtZero: true, grid: { color: "rgba(16,33,44,0.08)" } },
@@ -233,24 +277,24 @@ function renderCalibrationChart(payload) {
           data: pickAccuracies(curves.raw ?? []),
           borderColor: "#b85c38",
           backgroundColor: "rgba(184,92,56,0.15)",
-          pointRadius: 3,
-          tension: 0.25,
+          pointRadius: performanceProfile.pointRadius,
+          tension: performanceProfile.lineTension,
         },
         {
           label: "Calibrated",
           data: pickAccuracies(curves.calibrated ?? []),
           borderColor: "#145374",
           backgroundColor: "rgba(20,83,116,0.15)",
-          pointRadius: 3,
-          tension: 0.25,
+          pointRadius: performanceProfile.pointRadius,
+          tension: performanceProfile.lineTension,
         },
         {
           label: "MC Dropout",
           data: pickAccuracies(curves.mc_dropout ?? []),
           borderColor: "#4f772d",
           backgroundColor: "rgba(79,119,45,0.15)",
-          pointRadius: 3,
-          tension: 0.25,
+          pointRadius: performanceProfile.pointRadius,
+          tension: performanceProfile.lineTension,
         },
       ],
     },
@@ -325,14 +369,14 @@ function renderTrainingCharts(payload) {
           data: history.train_loss ?? [],
           borderColor: "#145374",
           backgroundColor: "rgba(20,83,116,0.16)",
-          tension: 0.25,
+          tension: performanceProfile.lineTension,
         },
         {
           label: "Validation loss",
           data: history.validation_loss ?? [],
           borderColor: "#b85c38",
           backgroundColor: "rgba(184,92,56,0.16)",
-          tension: 0.25,
+          tension: performanceProfile.lineTension,
         },
       ],
     },
@@ -356,14 +400,14 @@ function renderTrainingCharts(payload) {
           data: history.validation_accuracy ?? [],
           borderColor: "#4f772d",
           backgroundColor: "rgba(79,119,45,0.16)",
-          tension: 0.25,
+          tension: performanceProfile.lineTension,
         },
         {
           label: "Validation F1 macro",
           data: history.validation_f1_macro ?? [],
           borderColor: "#d9a441",
           backgroundColor: "rgba(217,164,65,0.18)",
-          tension: 0.25,
+          tension: performanceProfile.lineTension,
         },
       ],
     },
@@ -393,7 +437,7 @@ function renderUncertaintyScatter(payload) {
     points.push({
       x: point.confidence,
       y: point.entropy,
-      r: 5 + point.mutual_information * 22,
+      r: 5 + point.mutual_information * performanceProfile.bubbleRadiusScale,
     });
     grouped.set(key, points);
   });
@@ -483,14 +527,49 @@ function renderUncertaintyTable(payload) {
     .join("");
 }
 
-function fitCanvas(canvas) {
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  const context = canvas.getContext("2d");
-  context.setTransform(dpr, 0, 0, dpr, 0, 0);
-  return { context, width: rect.width, height: rect.height };
+function createSceneSurface(canvas) {
+  const context = canvas.getContext("2d", { alpha: false });
+  const state = {
+    context,
+    width: 0,
+    height: 0,
+    active: true,
+  };
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, performanceProfile.maxDpr);
+    state.width = rect.width;
+    state.height = rect.height;
+    canvas.width = Math.max(1, Math.round(rect.width * dpr));
+    canvas.height = Math.max(1, Math.round(rect.height * dpr));
+    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  resize();
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(() => resize());
+    observer.observe(canvas);
+  } else {
+    window.addEventListener("resize", resize);
+  }
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        state.active = entry?.isIntersecting ?? true;
+      },
+      { threshold: 0.08 },
+    );
+    observer.observe(canvas);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    state.active = !document.hidden;
+  });
+
+  return state;
 }
 
 function createPointerState(canvas) {
@@ -534,6 +613,7 @@ function startNeuroScene(payload) {
   neuroSceneStarted = true;
 
   const canvas = document.querySelector("#neuro-scene");
+  const surface = createSceneSurface(canvas);
   const pointer = createPointerState(canvas);
   const palette = ["#4cc9f0", "#90be6d", "#f9844a"];
   const clusterCenters = [
@@ -542,9 +622,10 @@ function startNeuroScene(payload) {
     { x: 110, y: 10, z: -10 },
   ];
   const nodes = [];
+  let lastTime = 0;
 
   clusterCenters.forEach((center, clusterIndex) => {
-    for (let index = 0; index < 28; index += 1) {
+    for (let index = 0; index < performanceProfile.neuroNodesPerCluster; index += 1) {
       nodes.push({
         x: center.x + (Math.random() - 0.5) * 120,
         y: center.y + (Math.random() - 0.5) * 150,
@@ -557,7 +638,13 @@ function startNeuroScene(payload) {
   });
 
   function draw(time) {
-    const { context, width, height } = fitCanvas(canvas);
+    requestAnimationFrame(draw);
+    if (!surface.active || time - lastTime < 1000 / performanceProfile.fps) {
+      return;
+    }
+    lastTime = time;
+
+    const { context, width, height } = surface;
     context.clearRect(0, 0, width, height);
 
     const gradient = context.createRadialGradient(width * 0.5, height * 0.25, 10, width * 0.5, height * 0.5, width * 0.7);
@@ -581,7 +668,11 @@ function startNeuroScene(payload) {
 
     for (let index = 0; index < projected.length; index += 1) {
       const current = projected[index];
-      for (let nextIndex = index + 1; nextIndex < Math.min(projected.length, index + 5); nextIndex += 1) {
+      for (
+        let nextIndex = index + 1;
+        nextIndex < Math.min(projected.length, index + performanceProfile.neuroConnectionSpan);
+        nextIndex += 1
+      ) {
         const next = projected[nextIndex];
         const dx = current.x - next.x;
         const dy = current.y - next.y;
@@ -600,7 +691,7 @@ function startNeuroScene(payload) {
     projected.forEach((point) => {
       context.beginPath();
       context.fillStyle = point.color;
-      context.shadowBlur = 18;
+      context.shadowBlur = performanceProfile.shadowBlur;
       context.shadowColor = point.color;
       context.arc(point.x, point.y, 2 + point.scale * 6 + point.pulse * 1.5, 0, Math.PI * 2);
       context.fill();
@@ -609,7 +700,7 @@ function startNeuroScene(payload) {
 
     context.strokeStyle = "rgba(255,255,255,0.14)";
     context.lineWidth = 1.2;
-    for (let ringIndex = 0; ringIndex < 3; ringIndex += 1) {
+    for (let ringIndex = 0; ringIndex < performanceProfile.neuroRingCount; ringIndex += 1) {
       const radius = 68 + ringIndex * 36 + Math.sin(time * 0.0013 + ringIndex) * 8;
       context.beginPath();
       context.ellipse(width / 2, height / 2, radius * 1.45, radius * 0.62, 0, 0, Math.PI * 2);
@@ -622,8 +713,6 @@ function startNeuroScene(payload) {
     context.fillStyle = "rgba(197,216,226,0.92)";
     context.font = "12px Georgia";
     context.fillText(`Entropy ${formatMetric(payload.metrics.mc_dropout_test?.mean_entropy)}  |  ECE ${formatMetric(payload.metrics.calibrated_test?.ece ?? payload.metrics.mc_dropout_test?.ece)}`, 20, 48);
-
-    requestAnimationFrame(draw);
   }
 
   requestAnimationFrame(draw);
@@ -641,7 +730,7 @@ function buildNetworkNodes(architecture) {
       ];
 
   return stages.map((stage, stageIndex) => {
-    const displayCount = Math.max(3, Math.min(14, stage.nodes));
+    const displayCount = Math.max(3, Math.min(performanceProfile.lowMotion ? 10 : 14, stage.nodes));
     return {
       ...stage,
       nodes3d: Array.from({ length: displayCount }, (_, index) => ({
@@ -660,19 +749,23 @@ function startNetworkScene(payload) {
   networkSceneStarted = true;
 
   const canvas = document.querySelector("#network-scene");
+  const surface = createSceneSurface(canvas);
   const pointer = createPointerState(canvas);
   const layers = buildNetworkNodes(payload.architecture ?? {});
   const connections = [];
+  let lastTime = 0;
 
   for (let layerIndex = 0; layerIndex < layers.length - 1; layerIndex += 1) {
     const sourceLayer = layers[layerIndex];
     const targetLayer = layers[layerIndex + 1];
     sourceLayer.nodes3d.forEach((sourceNode, sourceNodeIndex) => {
       targetLayer.nodes3d.forEach((targetNode, targetNodeIndex) => {
-        if ((sourceNodeIndex + targetNodeIndex) % 2 === 0 || targetLayer.nodes3d.length <= 4) {
+        if ((sourceNodeIndex + targetNodeIndex) % performanceProfile.networkConnectionModulo === 0 || targetLayer.nodes3d.length <= 4) {
           connections.push({
-            from: sourceNode,
-            to: targetNode,
+            fromLayerIndex: layerIndex,
+            toLayerIndex: layerIndex + 1,
+            fromIndex: sourceNodeIndex,
+            toIndex: targetNodeIndex,
             phase: Math.random(),
           });
         }
@@ -681,7 +774,13 @@ function startNetworkScene(payload) {
   }
 
   function draw(time) {
-    const { context, width, height } = fitCanvas(canvas);
+    requestAnimationFrame(draw);
+    if (!surface.active || time - lastTime < 1000 / performanceProfile.fps) {
+      return;
+    }
+    lastTime = time;
+
+    const { context, width, height } = surface;
     context.clearRect(0, 0, width, height);
 
     const background = context.createLinearGradient(0, 0, width, height);
@@ -712,12 +811,11 @@ function startNetworkScene(payload) {
     }));
 
     connections.forEach((connection) => {
-      const sourceLayer = projectedLayers.find((layer) => layer.nodes3d.includes(connection.from));
-      const targetLayer = projectedLayers.find((layer) => layer.nodes3d.includes(connection.to));
-      const fromIndex = sourceLayer.nodes3d.indexOf(connection.from);
-      const toIndex = targetLayer.nodes3d.indexOf(connection.to);
-      const from = sourceLayer.projected[fromIndex];
-      const to = targetLayer.projected[toIndex];
+      const from = projectedLayers[connection.fromLayerIndex]?.projected[connection.fromIndex];
+      const to = projectedLayers[connection.toLayerIndex]?.projected[connection.toIndex];
+      if (!from || !to) {
+        return;
+      }
 
       context.strokeStyle = "rgba(120, 171, 255, 0.12)";
       context.lineWidth = 1;
@@ -726,15 +824,17 @@ function startNetworkScene(payload) {
       context.lineTo(to.x, to.y);
       context.stroke();
 
-      const pulseT = (time * 0.00035 + connection.phase) % 1;
-      const pulseX = from.x + (to.x - from.x) * pulseT;
-      const pulseY = from.y + (to.y - from.y) * pulseT;
-      context.beginPath();
-      context.fillStyle = "rgba(255, 214, 102, 0.92)";
-      context.shadowBlur = 14;
-      context.shadowColor = "rgba(255, 214, 102, 0.9)";
-      context.arc(pulseX, pulseY, 2.2, 0, Math.PI * 2);
-      context.fill();
+      if (performanceProfile.showPulse) {
+        const pulseT = (time * 0.00035 + connection.phase) % 1;
+        const pulseX = from.x + (to.x - from.x) * pulseT;
+        const pulseY = from.y + (to.y - from.y) * pulseT;
+        context.beginPath();
+        context.fillStyle = "rgba(255, 214, 102, 0.92)";
+        context.shadowBlur = 14;
+        context.shadowColor = "rgba(255, 214, 102, 0.9)";
+        context.arc(pulseX, pulseY, 2.2, 0, Math.PI * 2);
+        context.fill();
+      }
     });
     context.shadowBlur = 0;
 
@@ -760,8 +860,6 @@ function startNetworkScene(payload) {
     context.fillStyle = "rgba(205,214,230,0.9)";
     context.font = "12px Georgia";
     context.fillText(`Fusion ${payload.architecture?.fusion_hidden_dim ?? "n/a"}  |  Dropout ${formatMetric(payload.architecture?.dropout, 2)}`, 20, 48);
-
-    requestAnimationFrame(draw);
   }
 
   requestAnimationFrame(draw);

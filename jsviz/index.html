@@ -77,6 +77,32 @@
         margin-bottom: 10px;
       }
 
+      .hero-credit {
+        position: absolute;
+        top: 20px;
+        right: 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(16, 33, 44, 0.08);
+        border: 1px solid rgba(16, 33, 44, 0.12);
+        color: #3c4f5b;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 10px 24px rgba(16, 33, 44, 0.08);
+      }
+
+      .hero-credit strong {
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: 0.02em;
+        text-transform: none;
+      }
+
       .hero h1 {
         margin: 0 0 14px;
         font-size: clamp(2.2rem, 5vw, 4rem);
@@ -159,6 +185,10 @@
       .architecture-list li {
         margin: 8px 0;
         color: var(--muted);
+      }
+
+      .hero-links .chip-row {
+        margin-top: 14px;
       }
 
       .metrics-grid {
@@ -269,10 +299,11 @@
         gap: 8px;
         padding: 8px 12px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        color: rgba(243, 247, 250, 0.82);
-        font-size: 0.76rem;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(243, 247, 250, 0.96);
+        font-size: 0.8rem;
+        font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         backdrop-filter: blur(10px);
@@ -281,7 +312,8 @@
       }
 
       .scene-signature strong {
-        font-weight: 600;
+        font-weight: 800;
+        color: #ffffff;
         letter-spacing: 0.02em;
         text-transform: none;
       }
@@ -449,6 +481,12 @@
           height: 280px;
         }
 
+        .hero-credit {
+          position: static;
+          margin-bottom: 12px;
+          width: fit-content;
+        }
+
         .heatmap-head,
         .heatmap-row {
           grid-template-columns: 110px repeat(3, minmax(42px, 1fr));
@@ -460,6 +498,7 @@
     <main id="app" class="shell">
       <section id="viewer-shell">
         <header class="hero">
+          <div class="hero-credit">crafted by <strong>Gabriel Duarte Arantes</strong></div>
           <div class="eyebrow">Open research visualization</div>
           <h1 id="project-title">Neuro-inspired probabilistic deep learning framework</h1>
           <p>
@@ -480,6 +519,7 @@
                 <li>Both 3D scenes run directly in the browser, without a live backend.</li>
                 <li>The viewer can be published as a static page for any repository visitor.</li>
               </ul>
+              <div id="performance-chip-row" class="chip-row"></div>
             </div>
           </div>
 
