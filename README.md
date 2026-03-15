@@ -163,6 +163,8 @@ The viewer includes:
 The repository already includes a GitHub Pages workflow for the public HTML frontend. After pushing `main` and enabling Pages in the repository settings, the viewer will be available at:
 
 `https://gabriel-lab-ia.github.io/Neuro-probabilistic-risk-deep-learning/`
+or
+https://gabriel-lab-ia.github.io/Neuro-probabilistic-risk-deep-learning/
 
 Deployment notes:
 
