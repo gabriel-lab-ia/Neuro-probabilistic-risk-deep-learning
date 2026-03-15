@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Frontend Viewer Banner</title>
+  <desc id="desc">Banner for the public HTML and JavaScript viewer.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbf4e9"/>
+      <stop offset="100%" stop-color="#e0ebf1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="420" rx="30" fill="url(#bg)"/>
+  <rect x="64" y="58" width="1072" height="304" rx="24" fill="#ffffff" fill-opacity="0.78" stroke="#10212c" stroke-opacity="0.08"/>
+  <rect x="94" y="94" width="430" height="52" rx="16" fill="#f7fafb"/>
+  <rect x="94" y="164" width="172" height="112" rx="20" fill="#ffffff" stroke="#10212c" stroke-opacity="0.06"/>
+  <rect x="284" y="164" width="172" height="112" rx="20" fill="#ffffff" stroke="#10212c" stroke-opacity="0.06"/>
+  <rect x="474" y="164" width="172" height="112" rx="20" fill="#ffffff" stroke="#10212c" stroke-opacity="0.06"/>
+  <rect x="676" y="94" width="426" height="236" rx="24" fill="#0d1822"/>
+  <circle cx="768" cy="175" r="14" fill="#4cc9f0"/>
+  <circle cx="840" cy="140" r="12" fill="#90be6d"/>
+  <circle cx="908" cy="198" r="13" fill="#f9844a"/>
+  <circle cx="980" cy="160" r="11" fill="#ffd166"/>
+  <circle cx="1048" cy="220" r="16" fill="#8ecae6"/>
+  <g stroke="#80d0ff" stroke-opacity="0.22">
+    <path d="M768 175 L840 140 L908 198 L980 160 L1048 220"/>
+    <path d="M840 140 L980 160"/>
+    <path d="M908 198 L1048 220"/>
+  </g>
+  <text x="96" y="128" fill="#10212c" font-size="26" font-family="Georgia, 'Times New Roman', serif" font-weight="700">Public HTML viewer</text>
+  <text x="96" y="316" fill="#52636f" font-size="22" font-family="Georgia, 'Times New Roman', serif">Static landing page with charts, metrics, and 3D exploration spaces</text>
+</svg>

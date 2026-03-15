@@ -1,0 +1,21 @@
+[project]
+name = "deeplearning"
+version = "0.1.0"
+description = "Neuro-inspired probabilistic deep learning research prototype for neurological risk classification with calibrated uncertainty"
+readme = "README.md"
+requires-python = "==3.11.*"
+keywords = [
+    "deep-learning",
+    "pytorch",
+    "uncertainty",
+    "mc-dropout",
+    "neurology",
+    "risk-classification",
+]
+
+[project.urls]
+Homepage = "https://github.com/gabriel-lab-ia/Neuro-probabilistic-risk-deep-learning"
+Repository = "https://github.com/gabriel-lab-ia/Neuro-probabilistic-risk-deep-learning"
+
+[tool.uv]
+package = false

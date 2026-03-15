@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520" role="img" aria-labelledby="title desc">
+  <title id="title">Neuro Risk Uncertainty Banner</title>
+  <desc id="desc">Repository banner for a neuro-inspired probabilistic deep learning framework.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8ea"/>
+      <stop offset="52%" stop-color="#e6eff3"/>
+      <stop offset="100%" stop-color="#d5e0e8"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="20%" cy="15%" r="65%">
+      <stop offset="0%" stop-color="#145374" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#145374" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="80%" cy="18%" r="52%">
+      <stop offset="0%" stop-color="#b85c38" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#b85c38" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#145374"/>
+      <stop offset="50%" stop-color="#4f772d"/>
+      <stop offset="100%" stop-color="#b85c38"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1400" height="520" rx="36" fill="url(#bg)"/>
+  <rect width="1400" height="520" rx="36" fill="url(#glowA)"/>
+  <rect width="1400" height="520" rx="36" fill="url(#glowB)"/>
+
+  <g opacity="0.18" stroke="url(#stroke)" stroke-width="2" fill="none">
+    <path d="M70 392 C210 292, 340 452, 470 352 S720 252, 840 332 1080 428, 1320 248"/>
+    <path d="M70 420 C210 320, 340 480, 470 380 S720 280, 840 360 1080 456, 1320 276"/>
+    <path d="M70 364 C210 264, 340 424, 470 324 S720 224, 840 304 1080 400, 1320 220"/>
+  </g>
+
+  <g fill="none" stroke="#145374" stroke-opacity="0.18">
+    <circle cx="1085" cy="150" r="82"/>
+    <circle cx="1085" cy="150" r="118"/>
+    <circle cx="1085" cy="150" r="154"/>
+  </g>
+
+  <g fill="#145374" fill-opacity="0.16">
+    <circle cx="1050" cy="140" r="9"/>
+    <circle cx="1116" cy="118" r="8"/>
+    <circle cx="1144" cy="182" r="10"/>
+    <circle cx="1002" cy="176" r="11"/>
+    <circle cx="1084" cy="204" r="7"/>
+  </g>
+
+  <g fill="#10212c">
+    <text x="86" y="122" font-size="26" font-family="Georgia, 'Times New Roman', serif" letter-spacing="3" text-transform="uppercase">Research Prototype</text>
+    <text x="86" y="196" font-size="44" font-family="Georgia, 'Times New Roman', serif" font-weight="700">
+      Neuro-inspired probabilistic deep learning
+    </text>
+    <text x="86" y="250" font-size="44" font-family="Georgia, 'Times New Roman', serif" font-weight="700">
+      for neurological risk classification
+    </text>
+    <text x="86" y="304" font-size="44" font-family="Georgia, 'Times New Roman', serif" font-weight="700">
+      with calibrated uncertainty
+    </text>
+  </g>
+
+  <g fill="#425763" font-family="Georgia, 'Times New Roman', serif" font-size="24">
+    <text x="86" y="370">PyTorch multimodal backbone</text>
+    <text x="86" y="406">Monte Carlo Dropout</text>
+    <text x="86" y="442">Temperature scaling</text>
+  </g>
+
+  <g transform="translate(880 328)">
+    <rect width="408" height="108" rx="22" fill="#ffffff" fill-opacity="0.72" stroke="#10212c" stroke-opacity="0.08"/>
+    <text x="28" y="42" fill="#10212c" font-size="26" font-family="Georgia, 'Times New Roman', serif" font-weight="700">Interactive public viewer</text>
+    <text x="28" y="76" fill="#52636f" font-size="20" font-family="Georgia, 'Times New Roman', serif">3D scenes, uncertainty analytics, and repository-ready exploration</text>
+  </g>
+</svg>

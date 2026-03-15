@@ -1,0 +1,1884 @@
+{
+  "architecture": {
+    "dropout": 0.25,
+    "fusion_hidden_dim": 96,
+    "num_classes": 3,
+    "stages": [
+      {
+        "group": "input",
+        "name": "tabular-input",
+        "nodes": 16
+      },
+      {
+        "group": "tabular",
+        "name": "tabular-mlp",
+        "nodes": 96
+      },
+      {
+        "group": "temporal",
+        "name": "temporal-conv",
+        "nodes": 64
+      },
+      {
+        "group": "fusion",
+        "name": "fusion",
+        "nodes": 96
+      },
+      {
+        "group": "output",
+        "name": "classifier",
+        "nodes": 3
+      }
+    ],
+    "tabular_hidden_dims": [
+      96,
+      128,
+      64
+    ],
+    "tabular_input_dim": 16,
+    "temporal_channels": [
+      32,
+      48,
+      64
+    ],
+    "temporal_embedding_dim": 64,
+    "temporal_input_shape": [
+      3,
+      96
+    ]
+  },
+  "best_epoch": null,
+  "cautions": [],
+  "chart_data": {
+    "calibration_curves": {
+      "calibrated": [
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.0,
+          "upper": 0.06666666666666667
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.06666666666666667,
+          "upper": 0.13333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.13333333333333333,
+          "upper": 0.2
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.2,
+          "upper": 0.26666666666666666
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.26666666666666666,
+          "upper": 0.3333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.3333333333333333,
+          "upper": 0.4
+        },
+        {
+          "accuracy": 0.6666666865348816,
+          "confidence": 0.45263364911079407,
+          "count": 9.0,
+          "lower": 0.4,
+          "upper": 0.4666666666666667
+        },
+        {
+          "accuracy": 0.4285714328289032,
+          "confidence": 0.5053874254226685,
+          "count": 21.0,
+          "lower": 0.4666666666666667,
+          "upper": 0.5333333333333333
+        },
+        {
+          "accuracy": 0.6153846383094788,
+          "confidence": 0.5755757093429565,
+          "count": 13.0,
+          "lower": 0.5333333333333333,
+          "upper": 0.6
+        },
+        {
+          "accuracy": 0.5333333611488342,
+          "confidence": 0.6386682987213135,
+          "count": 15.0,
+          "lower": 0.6,
+          "upper": 0.6666666666666666
+        },
+        {
+          "accuracy": 0.9473684430122375,
+          "confidence": 0.7075986862182617,
+          "count": 19.0,
+          "lower": 0.6666666666666666,
+          "upper": 0.7333333333333333
+        },
+        {
+          "accuracy": 0.8857142925262451,
+          "confidence": 0.7675051093101501,
+          "count": 35.0,
+          "lower": 0.7333333333333333,
+          "upper": 0.8
+        },
+        {
+          "accuracy": 0.9333333373069763,
+          "confidence": 0.8269525766372681,
+          "count": 30.0,
+          "lower": 0.8,
+          "upper": 0.8666666666666667
+        },
+        {
+          "accuracy": 1.0,
+          "confidence": 0.8691303730010986,
+          "count": 2.0,
+          "lower": 0.8666666666666667,
+          "upper": 0.9333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.9333333333333333,
+          "upper": 1.0
+        }
+      ],
+      "mc_dropout": [
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.0,
+          "upper": 0.06666666666666667
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.06666666666666667,
+          "upper": 0.13333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.13333333333333333,
+          "upper": 0.2
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.2,
+          "upper": 0.26666666666666666
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.26666666666666666,
+          "upper": 0.3333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.3333333333333333,
+          "upper": 0.4
+        },
+        {
+          "accuracy": 0.6666666865348816,
+          "confidence": 0.45263364911079407,
+          "count": 9.0,
+          "lower": 0.4,
+          "upper": 0.4666666666666667
+        },
+        {
+          "accuracy": 0.4285714328289032,
+          "confidence": 0.5053874254226685,
+          "count": 21.0,
+          "lower": 0.4666666666666667,
+          "upper": 0.5333333333333333
+        },
+        {
+          "accuracy": 0.6153846383094788,
+          "confidence": 0.5755757093429565,
+          "count": 13.0,
+          "lower": 0.5333333333333333,
+          "upper": 0.6
+        },
+        {
+          "accuracy": 0.5333333611488342,
+          "confidence": 0.6386682987213135,
+          "count": 15.0,
+          "lower": 0.6,
+          "upper": 0.6666666666666666
+        },
+        {
+          "accuracy": 0.9473684430122375,
+          "confidence": 0.7075986862182617,
+          "count": 19.0,
+          "lower": 0.6666666666666666,
+          "upper": 0.7333333333333333
+        },
+        {
+          "accuracy": 0.8857142925262451,
+          "confidence": 0.7675051093101501,
+          "count": 35.0,
+          "lower": 0.7333333333333333,
+          "upper": 0.8
+        },
+        {
+          "accuracy": 0.9333333373069763,
+          "confidence": 0.8269525766372681,
+          "count": 30.0,
+          "lower": 0.8,
+          "upper": 0.8666666666666667
+        },
+        {
+          "accuracy": 1.0,
+          "confidence": 0.8691303730010986,
+          "count": 2.0,
+          "lower": 0.8666666666666667,
+          "upper": 0.9333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.9333333333333333,
+          "upper": 1.0
+        }
+      ],
+      "raw": [
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.0,
+          "upper": 0.06666666666666667
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.06666666666666667,
+          "upper": 0.13333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.13333333333333333,
+          "upper": 0.2
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.2,
+          "upper": 0.26666666666666666
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.26666666666666666,
+          "upper": 0.3333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.3333333333333333,
+          "upper": 0.4
+        },
+        {
+          "accuracy": 0.6666666865348816,
+          "confidence": 0.45263364911079407,
+          "count": 9.0,
+          "lower": 0.4,
+          "upper": 0.4666666666666667
+        },
+        {
+          "accuracy": 0.4285714328289032,
+          "confidence": 0.5053874254226685,
+          "count": 21.0,
+          "lower": 0.4666666666666667,
+          "upper": 0.5333333333333333
+        },
+        {
+          "accuracy": 0.6153846383094788,
+          "confidence": 0.5755757093429565,
+          "count": 13.0,
+          "lower": 0.5333333333333333,
+          "upper": 0.6
+        },
+        {
+          "accuracy": 0.5333333611488342,
+          "confidence": 0.6386682987213135,
+          "count": 15.0,
+          "lower": 0.6,
+          "upper": 0.6666666666666666
+        },
+        {
+          "accuracy": 0.9473684430122375,
+          "confidence": 0.7075986862182617,
+          "count": 19.0,
+          "lower": 0.6666666666666666,
+          "upper": 0.7333333333333333
+        },
+        {
+          "accuracy": 0.8857142925262451,
+          "confidence": 0.7675051093101501,
+          "count": 35.0,
+          "lower": 0.7333333333333333,
+          "upper": 0.8
+        },
+        {
+          "accuracy": 0.9333333373069763,
+          "confidence": 0.8269525766372681,
+          "count": 30.0,
+          "lower": 0.8,
+          "upper": 0.8666666666666667
+        },
+        {
+          "accuracy": 1.0,
+          "confidence": 0.8691303730010986,
+          "count": 2.0,
+          "lower": 0.8666666666666667,
+          "upper": 0.9333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.9333333333333333,
+          "upper": 1.0
+        }
+      ]
+    },
+    "comparison_metrics": {
+      "calibrated": [
+        0.7638888888888888,
+        0.7516290726817042,
+        0.9310948835838645,
+        0.6847445964813232
+      ],
+      "labels": [
+        "accuracy",
+        "f1_macro",
+        "auroc_ovr",
+        "mean_confidence"
+      ],
+      "mc_dropout": [
+        0.7638888888888888,
+        0.7516290726817042,
+        0.9310948835838645,
+        0.6847445964813232
+      ],
+      "raw": [
+        0.7638888888888888,
+        0.7516290726817042,
+        0.9310948835838645,
+        0.6847445964813232
+      ]
+    },
+    "confusion_matrices": {
+      "calibrated": [
+        [
+          49,
+          3,
+          0
+        ],
+        [
+          13,
+          25,
+          12
+        ],
+        [
+          0,
+          6,
+          36
+        ]
+      ],
+      "mc_dropout": [
+        [
+          49,
+          3,
+          0
+        ],
+        [
+          13,
+          25,
+          12
+        ],
+        [
+          0,
+          6,
+          36
+        ]
+      ],
+      "raw": [
+        [
+          49,
+          3,
+          0
+        ],
+        [
+          13,
+          25,
+          12
+        ],
+        [
+          0,
+          6,
+          36
+        ]
+      ]
+    },
+    "uncertainty_scatter": [
+      {
+        "confidence": 0.7569573521614075,
+        "entropy": 0.6984190940856934,
+        "mutual_information": 0.04427206516265869,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 0,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8467956781387329,
+        "entropy": 0.4810619652271271,
+        "mutual_information": 0.014402955770492554,
+        "predicted_label": "baseline-risk",
+        "sample_index": 1,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7824221253395081,
+        "entropy": 0.6512671709060669,
+        "mutual_information": 0.011930763721466064,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 2,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.5229833126068115,
+        "entropy": 0.8650631904602051,
+        "mutual_information": 0.14832854270935059,
+        "predicted_label": "baseline-risk",
+        "sample_index": 3,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8289348483085632,
+        "entropy": 0.5115524530410767,
+        "mutual_information": 0.006839931011199951,
+        "predicted_label": "baseline-risk",
+        "sample_index": 4,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7606449127197266,
+        "entropy": 0.6837204694747925,
+        "mutual_information": 0.05625879764556885,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 5,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7213979959487915,
+        "entropy": 0.7416236400604248,
+        "mutual_information": 0.06644666194915771,
+        "predicted_label": "baseline-risk",
+        "sample_index": 6,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7109571099281311,
+        "entropy": 0.7352135181427002,
+        "mutual_information": 0.02916771173477173,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 7,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.6619370579719543,
+        "entropy": 0.7244099378585815,
+        "mutual_information": 0.004913151264190674,
+        "predicted_label": "baseline-risk",
+        "sample_index": 8,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7212154269218445,
+        "entropy": 0.675843358039856,
+        "mutual_information": 0.06444340944290161,
+        "predicted_label": "baseline-risk",
+        "sample_index": 9,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7982127070426941,
+        "entropy": 0.5742881298065186,
+        "mutual_information": 0.010452628135681152,
+        "predicted_label": "baseline-risk",
+        "sample_index": 10,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.865698516368866,
+        "entropy": 0.4588856101036072,
+        "mutual_information": 0.018006175756454468,
+        "predicted_label": "baseline-risk",
+        "sample_index": 11,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.764335036277771,
+        "entropy": 0.6854084730148315,
+        "mutual_information": 0.027091622352600098,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 12,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.5000301003456116,
+        "entropy": 0.8031639456748962,
+        "mutual_information": 0.03357607126235962,
+        "predicted_label": "baseline-risk",
+        "sample_index": 13,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8689332008361816,
+        "entropy": 0.43724948167800903,
+        "mutual_information": 0.010302603244781494,
+        "predicted_label": "baseline-risk",
+        "sample_index": 14,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5130602121353149,
+        "entropy": 1.0300815105438232,
+        "mutual_information": 0.1028444766998291,
+        "predicted_label": "monitor-closely",
+        "sample_index": 15,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7145079970359802,
+        "entropy": 0.6985169053077698,
+        "mutual_information": 0.033197104930877686,
+        "predicted_label": "baseline-risk",
+        "sample_index": 16,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.6275056600570679,
+        "entropy": 0.7507236003875732,
+        "mutual_information": 0.03652358055114746,
+        "predicted_label": "baseline-risk",
+        "sample_index": 17,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.46351736783981323,
+        "entropy": 0.9507960081100464,
+        "mutual_information": 0.10090500116348267,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 18,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7083984613418579,
+        "entropy": 0.8001542091369629,
+        "mutual_information": 0.08763176202774048,
+        "predicted_label": "monitor-closely",
+        "sample_index": 19,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8354955911636353,
+        "entropy": 0.4991840422153473,
+        "mutual_information": 0.023853302001953125,
+        "predicted_label": "baseline-risk",
+        "sample_index": 20,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7170112133026123,
+        "entropy": 0.7880665063858032,
+        "mutual_information": 0.0414506196975708,
+        "predicted_label": "monitor-closely",
+        "sample_index": 21,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8272714614868164,
+        "entropy": 0.5211740732192993,
+        "mutual_information": 0.022320479154586792,
+        "predicted_label": "baseline-risk",
+        "sample_index": 22,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8274357914924622,
+        "entropy": 0.5436386466026306,
+        "mutual_information": 0.019046008586883545,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 23,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8428665399551392,
+        "entropy": 0.4889531135559082,
+        "mutual_information": 0.007598012685775757,
+        "predicted_label": "baseline-risk",
+        "sample_index": 24,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.447331964969635,
+        "entropy": 1.0106775760650635,
+        "mutual_information": 0.11203932762145996,
+        "predicted_label": "monitor-closely",
+        "sample_index": 25,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7379305958747864,
+        "entropy": 0.6415525078773499,
+        "mutual_information": 0.024195969104766846,
+        "predicted_label": "baseline-risk",
+        "sample_index": 26,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.788026750087738,
+        "entropy": 0.6434137225151062,
+        "mutual_information": 0.04924046993255615,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 27,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7122575044631958,
+        "entropy": 0.7568796873092651,
+        "mutual_information": 0.034222304821014404,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 28,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7794792056083679,
+        "entropy": 0.6404935121536255,
+        "mutual_information": 0.02867788076400757,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 29,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.47842296957969666,
+        "entropy": 0.9733666181564331,
+        "mutual_information": 0.0509486198425293,
+        "predicted_label": "monitor-closely",
+        "sample_index": 30,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.6247603893280029,
+        "entropy": 0.8451076149940491,
+        "mutual_information": 0.07086175680160522,
+        "predicted_label": "monitor-closely",
+        "sample_index": 31,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7970190048217773,
+        "entropy": 0.5749839544296265,
+        "mutual_information": 0.016203880310058594,
+        "predicted_label": "baseline-risk",
+        "sample_index": 32,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.4870578348636627,
+        "entropy": 0.8426642417907715,
+        "mutual_information": 0.058421790599823,
+        "predicted_label": "monitor-closely",
+        "sample_index": 33,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5131099820137024,
+        "entropy": 0.7911477088928223,
+        "mutual_information": 0.028318285942077637,
+        "predicted_label": "monitor-closely",
+        "sample_index": 34,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.4664342403411865,
+        "entropy": 0.934792160987854,
+        "mutual_information": 0.036385178565979004,
+        "predicted_label": "monitor-closely",
+        "sample_index": 35,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7189093828201294,
+        "entropy": 0.7395516037940979,
+        "mutual_information": 0.04845494031906128,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 36,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.742197573184967,
+        "entropy": 0.7465046644210815,
+        "mutual_information": 0.034829795360565186,
+        "predicted_label": "monitor-closely",
+        "sample_index": 37,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7522248029708862,
+        "entropy": 0.6954036355018616,
+        "mutual_information": 0.029506802558898926,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 38,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.4637978971004486,
+        "entropy": 0.9162675142288208,
+        "mutual_information": 0.07567113637924194,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 39,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8395349383354187,
+        "entropy": 0.5031206607818604,
+        "mutual_information": 0.009917497634887695,
+        "predicted_label": "baseline-risk",
+        "sample_index": 40,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8179315328598022,
+        "entropy": 0.57947838306427,
+        "mutual_information": 0.010278046131134033,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 41,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.6441973447799683,
+        "entropy": 0.8563835024833679,
+        "mutual_information": 0.0754162073135376,
+        "predicted_label": "monitor-closely",
+        "sample_index": 42,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7555696368217468,
+        "entropy": 0.6183832287788391,
+        "mutual_information": 0.028743445873260498,
+        "predicted_label": "baseline-risk",
+        "sample_index": 43,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.6470389366149902,
+        "entropy": 0.8133330345153809,
+        "mutual_information": 0.06601935625076294,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 44,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.594417929649353,
+        "entropy": 0.7854985594749451,
+        "mutual_information": 0.05979436635971069,
+        "predicted_label": "baseline-risk",
+        "sample_index": 45,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8012153506278992,
+        "entropy": 0.5651872158050537,
+        "mutual_information": 0.008768141269683838,
+        "predicted_label": "baseline-risk",
+        "sample_index": 46,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8382412195205688,
+        "entropy": 0.5005742907524109,
+        "mutual_information": 0.009458720684051514,
+        "predicted_label": "baseline-risk",
+        "sample_index": 47,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.793135941028595,
+        "entropy": 0.5817583799362183,
+        "mutual_information": 0.03320181369781494,
+        "predicted_label": "baseline-risk",
+        "sample_index": 48,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5613400340080261,
+        "entropy": 0.924785852432251,
+        "mutual_information": 0.08593928813934326,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 49,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.5660400390625,
+        "entropy": 0.769997239112854,
+        "mutual_information": 0.0298805832862854,
+        "predicted_label": "baseline-risk",
+        "sample_index": 50,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.6556369066238403,
+        "entropy": 0.7223557829856873,
+        "mutual_information": 0.05502450466156006,
+        "predicted_label": "baseline-risk",
+        "sample_index": 51,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8291512727737427,
+        "entropy": 0.5253240466117859,
+        "mutual_information": 0.03497445583343506,
+        "predicted_label": "baseline-risk",
+        "sample_index": 52,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.4965963363647461,
+        "entropy": 0.8009029030799866,
+        "mutual_information": 0.0242806077003479,
+        "predicted_label": "baseline-risk",
+        "sample_index": 53,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7762917280197144,
+        "entropy": 0.6496524810791016,
+        "mutual_information": 0.02863597869873047,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 54,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.5273383855819702,
+        "entropy": 0.8064388036727905,
+        "mutual_information": 0.025955379009246826,
+        "predicted_label": "monitor-closely",
+        "sample_index": 55,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8181726336479187,
+        "entropy": 0.5787556171417236,
+        "mutual_information": 0.010447561740875244,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 56,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.6088640093803406,
+        "entropy": 0.8717610239982605,
+        "mutual_information": 0.0688776969909668,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 57,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8218286633491516,
+        "entropy": 0.5709095597267151,
+        "mutual_information": 0.013397037982940674,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 58,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.6582802534103394,
+        "entropy": 0.8138169050216675,
+        "mutual_information": 0.028012394905090332,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 59,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.5898647904396057,
+        "entropy": 0.8834551572799683,
+        "mutual_information": 0.01911836862564087,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 60,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.4230314791202545,
+        "entropy": 1.0578721761703491,
+        "mutual_information": 0.15560054779052734,
+        "predicted_label": "monitor-closely",
+        "sample_index": 61,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.49074307084083557,
+        "entropy": 0.9323146939277649,
+        "mutual_information": 0.06741714477539062,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 62,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7837110757827759,
+        "entropy": 0.6021272540092468,
+        "mutual_information": 0.026281356811523438,
+        "predicted_label": "baseline-risk",
+        "sample_index": 63,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5450559258460999,
+        "entropy": 0.7990458011627197,
+        "mutual_information": 0.03849059343338013,
+        "predicted_label": "baseline-risk",
+        "sample_index": 64,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8693275451660156,
+        "entropy": 0.44834834337234497,
+        "mutual_information": 0.004614651203155518,
+        "predicted_label": "baseline-risk",
+        "sample_index": 65,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8465509414672852,
+        "entropy": 0.4871065318584442,
+        "mutual_information": 0.008303791284561157,
+        "predicted_label": "baseline-risk",
+        "sample_index": 66,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5333112478256226,
+        "entropy": 0.7925676107406616,
+        "mutual_information": 0.051190853118896484,
+        "predicted_label": "baseline-risk",
+        "sample_index": 67,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.5391685366630554,
+        "entropy": 0.8168871402740479,
+        "mutual_information": 0.10500621795654297,
+        "predicted_label": "monitor-closely",
+        "sample_index": 68,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.5705321431159973,
+        "entropy": 0.7812588810920715,
+        "mutual_information": 0.09401881694793701,
+        "predicted_label": "baseline-risk",
+        "sample_index": 69,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.4632899761199951,
+        "entropy": 1.0389986038208008,
+        "mutual_information": 0.13990193605422974,
+        "predicted_label": "monitor-closely",
+        "sample_index": 70,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.6003789305686951,
+        "entropy": 0.9483135938644409,
+        "mutual_information": 0.06840533018112183,
+        "predicted_label": "monitor-closely",
+        "sample_index": 71,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7577314972877502,
+        "entropy": 0.7103330492973328,
+        "mutual_information": 0.04665762186050415,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 72,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.720988392829895,
+        "entropy": 0.7078405618667603,
+        "mutual_information": 0.023644685745239258,
+        "predicted_label": "monitor-closely",
+        "sample_index": 73,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8029645085334778,
+        "entropy": 0.6106176972389221,
+        "mutual_information": 0.02974790334701538,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 74,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7987478971481323,
+        "entropy": 0.6230960488319397,
+        "mutual_information": 0.031292736530303955,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 75,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7270909547805786,
+        "entropy": 0.7313879728317261,
+        "mutual_information": 0.029120564460754395,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 76,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7976335287094116,
+        "entropy": 0.5670979022979736,
+        "mutual_information": 0.012804746627807617,
+        "predicted_label": "baseline-risk",
+        "sample_index": 77,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7111453413963318,
+        "entropy": 0.7494576573371887,
+        "mutual_information": 0.02707904577255249,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 78,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.791145920753479,
+        "entropy": 0.6290014386177063,
+        "mutual_information": 0.00827258825302124,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 79,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.4661845564842224,
+        "entropy": 1.0008955001831055,
+        "mutual_information": 0.05762702226638794,
+        "predicted_label": "monitor-closely",
+        "sample_index": 80,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.684055745601654,
+        "entropy": 0.8015865683555603,
+        "mutual_information": 0.02864891290664673,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 81,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.5757395029067993,
+        "entropy": 0.8996381759643555,
+        "mutual_information": 0.10270023345947266,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 82,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.5107065439224243,
+        "entropy": 0.805637538433075,
+        "mutual_information": 0.051691412925720215,
+        "predicted_label": "monitor-closely",
+        "sample_index": 83,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8309305906295776,
+        "entropy": 0.5213589668273926,
+        "mutual_information": 0.016015708446502686,
+        "predicted_label": "baseline-risk",
+        "sample_index": 84,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7356814742088318,
+        "entropy": 0.7110025882720947,
+        "mutual_information": 0.06045776605606079,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 85,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.5291388630867004,
+        "entropy": 0.9301258325576782,
+        "mutual_information": 0.09450036287307739,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 86,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.6554323434829712,
+        "entropy": 0.7480204105377197,
+        "mutual_information": 0.03580743074417114,
+        "predicted_label": "baseline-risk",
+        "sample_index": 87,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.834753692150116,
+        "entropy": 0.5170389413833618,
+        "mutual_information": 0.009981334209442139,
+        "predicted_label": "baseline-risk",
+        "sample_index": 88,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7479639649391174,
+        "entropy": 0.715753972530365,
+        "mutual_information": 0.055015623569488525,
+        "predicted_label": "monitor-closely",
+        "sample_index": 89,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7550522089004517,
+        "entropy": 0.6255382895469666,
+        "mutual_information": 0.02444368600845337,
+        "predicted_label": "baseline-risk",
+        "sample_index": 90,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8037104606628418,
+        "entropy": 0.5574122667312622,
+        "mutual_information": 0.01615142822265625,
+        "predicted_label": "baseline-risk",
+        "sample_index": 91,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7244352698326111,
+        "entropy": 0.660114586353302,
+        "mutual_information": 0.035112738609313965,
+        "predicted_label": "baseline-risk",
+        "sample_index": 92,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7538534998893738,
+        "entropy": 0.6852303147315979,
+        "mutual_information": 0.04295927286148071,
+        "predicted_label": "monitor-closely",
+        "sample_index": 93,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.6681571006774902,
+        "entropy": 0.7667294144630432,
+        "mutual_information": 0.03387010097503662,
+        "predicted_label": "baseline-risk",
+        "sample_index": 94,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.809023380279541,
+        "entropy": 0.5594866275787354,
+        "mutual_information": 0.03535664081573486,
+        "predicted_label": "baseline-risk",
+        "sample_index": 95,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.48041653633117676,
+        "entropy": 0.9865480661392212,
+        "mutual_information": 0.03336739540100098,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 96,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7630678415298462,
+        "entropy": 0.6109318137168884,
+        "mutual_information": 0.028151869773864746,
+        "predicted_label": "baseline-risk",
+        "sample_index": 97,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.587897777557373,
+        "entropy": 0.9598717093467712,
+        "mutual_information": 0.08770233392715454,
+        "predicted_label": "monitor-closely",
+        "sample_index": 98,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.49591827392578125,
+        "entropy": 0.8288394212722778,
+        "mutual_information": 0.06938153505325317,
+        "predicted_label": "monitor-closely",
+        "sample_index": 99,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.6292896866798401,
+        "entropy": 0.9161723852157593,
+        "mutual_information": 0.0659264326095581,
+        "predicted_label": "monitor-closely",
+        "sample_index": 100,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.5118052959442139,
+        "entropy": 0.9192972183227539,
+        "mutual_information": 0.09176903963088989,
+        "predicted_label": "monitor-closely",
+        "sample_index": 101,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8222334980964661,
+        "entropy": 0.5675577521324158,
+        "mutual_information": 0.008401095867156982,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 102,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.4414580762386322,
+        "entropy": 1.0508437156677246,
+        "mutual_information": 0.144639790058136,
+        "predicted_label": "monitor-closely",
+        "sample_index": 103,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7921770811080933,
+        "entropy": 0.6238858699798584,
+        "mutual_information": 0.015123844146728516,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 104,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7499184608459473,
+        "entropy": 0.6306054592132568,
+        "mutual_information": 0.031361520290374756,
+        "predicted_label": "baseline-risk",
+        "sample_index": 105,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5903195142745972,
+        "entropy": 0.9511266946792603,
+        "mutual_information": 0.052975475788116455,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 106,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.6696476340293884,
+        "entropy": 0.7343983054161072,
+        "mutual_information": 0.012536466121673584,
+        "predicted_label": "baseline-risk",
+        "sample_index": 107,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.6307657957077026,
+        "entropy": 0.7290982604026794,
+        "mutual_information": 0.06606405973434448,
+        "predicted_label": "baseline-risk",
+        "sample_index": 108,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8382202386856079,
+        "entropy": 0.5032764077186584,
+        "mutual_information": 0.015685290098190308,
+        "predicted_label": "baseline-risk",
+        "sample_index": 109,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7172747850418091,
+        "entropy": 0.6850587129592896,
+        "mutual_information": 0.07490062713623047,
+        "predicted_label": "baseline-risk",
+        "sample_index": 110,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.43865737318992615,
+        "entropy": 1.018009901046753,
+        "mutual_information": 0.0688774585723877,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 111,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7618541717529297,
+        "entropy": 0.611503005027771,
+        "mutual_information": 0.01827383041381836,
+        "predicted_label": "baseline-risk",
+        "sample_index": 112,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5815557241439819,
+        "entropy": 0.8039806485176086,
+        "mutual_information": 0.0628320574760437,
+        "predicted_label": "monitor-closely",
+        "sample_index": 113,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.511370062828064,
+        "entropy": 1.008086919784546,
+        "mutual_information": 0.12409394979476929,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 114,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.585776150226593,
+        "entropy": 0.8393212556838989,
+        "mutual_information": 0.05736333131790161,
+        "predicted_label": "monitor-closely",
+        "sample_index": 115,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8442567586898804,
+        "entropy": 0.49344608187675476,
+        "mutual_information": 0.011207222938537598,
+        "predicted_label": "baseline-risk",
+        "sample_index": 116,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7522599101066589,
+        "entropy": 0.6964728236198425,
+        "mutual_information": 0.03207021951675415,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 117,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7123631238937378,
+        "entropy": 0.7956068515777588,
+        "mutual_information": 0.06048703193664551,
+        "predicted_label": "monitor-closely",
+        "sample_index": 118,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7505037188529968,
+        "entropy": 0.6158451437950134,
+        "mutual_information": 0.020759642124176025,
+        "predicted_label": "baseline-risk",
+        "sample_index": 119,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7468163371086121,
+        "entropy": 0.6329084038734436,
+        "mutual_information": 0.053265273571014404,
+        "predicted_label": "baseline-risk",
+        "sample_index": 120,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8485643267631531,
+        "entropy": 0.4803866446018219,
+        "mutual_information": 0.007834762334823608,
+        "predicted_label": "baseline-risk",
+        "sample_index": 121,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.8065384030342102,
+        "entropy": 0.6020097732543945,
+        "mutual_information": 0.03316777944564819,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 122,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7867793440818787,
+        "entropy": 0.5730171203613281,
+        "mutual_information": 0.020087897777557373,
+        "predicted_label": "baseline-risk",
+        "sample_index": 123,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.6306782364845276,
+        "entropy": 0.9040545225143433,
+        "mutual_information": 0.06013226509094238,
+        "predicted_label": "monitor-closely",
+        "sample_index": 124,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.7653144598007202,
+        "entropy": 0.6728270053863525,
+        "mutual_information": 0.02806180715560913,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 125,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8123220205307007,
+        "entropy": 0.5594238638877869,
+        "mutual_information": 0.02181762456893921,
+        "predicted_label": "baseline-risk",
+        "sample_index": 126,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.7545559406280518,
+        "entropy": 0.6894018054008484,
+        "mutual_information": 0.04295092821121216,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 127,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7513476610183716,
+        "entropy": 0.6412244439125061,
+        "mutual_information": 0.033863842487335205,
+        "predicted_label": "baseline-risk",
+        "sample_index": 128,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5177258253097534,
+        "entropy": 0.8613276481628418,
+        "mutual_information": 0.05817830562591553,
+        "predicted_label": "monitor-closely",
+        "sample_index": 129,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.8078182935714722,
+        "entropy": 0.6036794185638428,
+        "mutual_information": 0.019611597061157227,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 130,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8285239934921265,
+        "entropy": 0.5378828644752502,
+        "mutual_information": 0.018142282962799072,
+        "predicted_label": "baseline-risk",
+        "sample_index": 131,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.6948963403701782,
+        "entropy": 0.7616445422172546,
+        "mutual_information": 0.028213202953338623,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 132,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.511204183101654,
+        "entropy": 0.84183669090271,
+        "mutual_information": 0.05438655614852905,
+        "predicted_label": "baseline-risk",
+        "sample_index": 133,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.48810920119285583,
+        "entropy": 0.965324878692627,
+        "mutual_information": 0.06269568204879761,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 134,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8229924440383911,
+        "entropy": 0.5304373502731323,
+        "mutual_information": 0.025040388107299805,
+        "predicted_label": "baseline-risk",
+        "sample_index": 135,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.6896649599075317,
+        "entropy": 0.7251454591751099,
+        "mutual_information": 0.06178325414657593,
+        "predicted_label": "baseline-risk",
+        "sample_index": 136,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.47422391176223755,
+        "entropy": 0.8993790149688721,
+        "mutual_information": 0.051248788833618164,
+        "predicted_label": "monitor-closely",
+        "sample_index": 137,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.5947753190994263,
+        "entropy": 0.8456749320030212,
+        "mutual_information": 0.04033118486404419,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 138,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.8085986971855164,
+        "entropy": 0.551664412021637,
+        "mutual_information": 0.018139362335205078,
+        "predicted_label": "baseline-risk",
+        "sample_index": 139,
+        "true_label": "monitor-closely"
+      },
+      {
+        "confidence": 0.6392296552658081,
+        "entropy": 0.8251192569732666,
+        "mutual_information": 0.03511810302734375,
+        "predicted_label": "monitor-closely",
+        "sample_index": 140,
+        "true_label": "high-risk-flag"
+      },
+      {
+        "confidence": 0.7821121215820312,
+        "entropy": 0.5943700671195984,
+        "mutual_information": 0.011740565299987793,
+        "predicted_label": "baseline-risk",
+        "sample_index": 141,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.5198627710342407,
+        "entropy": 0.8190053105354309,
+        "mutual_information": 0.0528637170791626,
+        "predicted_label": "monitor-closely",
+        "sample_index": 142,
+        "true_label": "baseline-risk"
+      },
+      {
+        "confidence": 0.666028618812561,
+        "entropy": 0.8300777673721313,
+        "mutual_information": 0.06209564208984375,
+        "predicted_label": "high-risk-flag",
+        "sample_index": 143,
+        "true_label": "monitor-closely"
+      }
+    ]
+  },
+  "class_confidence_profile": {
+    "baseline-risk": {
+      "mean_probability": 0.4028920829296112,
+      "mean_variance": 0.008516581729054451
+    },
+    "high-risk-flag": {
+      "mean_probability": 0.2828329801559448,
+      "mean_variance": 0.008608714677393436
+    },
+    "monitor-closely": {
+      "mean_probability": 0.31427493691444397,
+      "mean_variance": 0.011866223998367786
+    }
+  },
+  "class_mean_probabilities": [
+    0.4028921127319336,
+    0.31427493691444397,
+    0.2828329801559448
+  ],
+  "class_mean_variances": [
+    0.008516580797731876,
+    0.011866223998367786,
+    0.008608714677393436
+  ],
+  "device": "unknown",
+  "history": {},
+  "label_names": [
+    "baseline-risk",
+    "monitor-closely",
+    "high-risk-flag"
+  ],
+  "metrics": {
+    "mc_dropout_test": {
+      "accuracy": 0.7638888888888888,
+      "auroc_ovr": 0.9310948835838645,
+      "confusion_matrix": [
+        [
+          49,
+          3,
+          0
+        ],
+        [
+          13,
+          25,
+          12
+        ],
+        [
+          0,
+          6,
+          36
+        ]
+      ],
+      "ece": 0.12349362629983161,
+      "f1_macro": 0.7516290726817042,
+      "mean_confidence": 0.6847445964813232,
+      "mean_entropy": 0.7245832681655884,
+      "nll": 0.5535224790849513,
+      "reliability_bins": [
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.0,
+          "upper": 0.06666666666666667
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.06666666666666667,
+          "upper": 0.13333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.13333333333333333,
+          "upper": 0.2
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.2,
+          "upper": 0.26666666666666666
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.26666666666666666,
+          "upper": 0.3333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.3333333333333333,
+          "upper": 0.4
+        },
+        {
+          "accuracy": 0.6666666865348816,
+          "confidence": 0.45263364911079407,
+          "count": 9.0,
+          "lower": 0.4,
+          "upper": 0.4666666666666667
+        },
+        {
+          "accuracy": 0.4285714328289032,
+          "confidence": 0.5053874254226685,
+          "count": 21.0,
+          "lower": 0.4666666666666667,
+          "upper": 0.5333333333333333
+        },
+        {
+          "accuracy": 0.6153846383094788,
+          "confidence": 0.5755757093429565,
+          "count": 13.0,
+          "lower": 0.5333333333333333,
+          "upper": 0.6
+        },
+        {
+          "accuracy": 0.5333333611488342,
+          "confidence": 0.6386682987213135,
+          "count": 15.0,
+          "lower": 0.6,
+          "upper": 0.6666666666666666
+        },
+        {
+          "accuracy": 0.9473684430122375,
+          "confidence": 0.7075986862182617,
+          "count": 19.0,
+          "lower": 0.6666666666666666,
+          "upper": 0.7333333333333333
+        },
+        {
+          "accuracy": 0.8857142925262451,
+          "confidence": 0.7675051093101501,
+          "count": 35.0,
+          "lower": 0.7333333333333333,
+          "upper": 0.8
+        },
+        {
+          "accuracy": 0.9333333373069763,
+          "confidence": 0.8269525766372681,
+          "count": 30.0,
+          "lower": 0.8,
+          "upper": 0.8666666666666667
+        },
+        {
+          "accuracy": 1.0,
+          "confidence": 0.8691303730010986,
+          "count": 2.0,
+          "lower": 0.8666666666666667,
+          "upper": 0.9333333333333333
+        },
+        {
+          "accuracy": 0.0,
+          "confidence": 0.0,
+          "count": 0.0,
+          "lower": 0.9333333333333333,
+          "upper": 1.0
+        }
+      ]
+    }
+  },
+  "project": "Neuro-inspired probabilistic deep learning framework for neurological risk classification with calibrated uncertainty",
+  "temperature": 1.3346810340881348,
+  "uncertain_examples": [
+    {
+      "confidence": 0.4230314791202545,
+      "mean_probabilities": [
+        0.20704901218414307,
+        0.4230314791202545,
+        0.3699195683002472
+      ],
+      "mutual_information": 0.15560054779052734,
+      "predicted_label": "monitor-closely",
+      "predictive_entropy": 1.0578721761703491,
+      "sample_index": 61,
+      "true_label": "monitor-closely"
+    },
+    {
+      "confidence": 0.4414580762386322,
+      "mean_probabilities": [
+        0.20039184391498566,
+        0.4414580762386322,
+        0.35815009474754333
+      ],
+      "mutual_information": 0.144639790058136,
+      "predicted_label": "monitor-closely",
+      "predictive_entropy": 1.0508437156677246,
+      "sample_index": 103,
+      "true_label": "monitor-closely"
+    },
+    {
+      "confidence": 0.4632899761199951,
+      "mean_probabilities": [
+        0.18957722187042236,
+        0.4632899761199951,
+        0.3471328318119049
+      ],
+      "mutual_information": 0.13990193605422974,
+      "predicted_label": "monitor-closely",
+      "predictive_entropy": 1.0389986038208008,
+      "sample_index": 70,
+      "true_label": "monitor-closely"
+    },
+    {
+      "confidence": 0.5130602121353149,
+      "mean_probabilities": [
+        0.25120168924331665,
+        0.5130602121353149,
+        0.2357381135225296
+      ],
+      "mutual_information": 0.1028444766998291,
+      "predicted_label": "monitor-closely",
+      "predictive_entropy": 1.0300815105438232,
+      "sample_index": 15,
+      "true_label": "monitor-closely"
+    },
+    {
+      "confidence": 0.43865737318992615,
+      "mean_probabilities": [
+        0.1567085236310959,
+        0.40463417768478394,
+        0.43865737318992615
+      ],
+      "mutual_information": 0.0688774585723877,
+      "predicted_label": "high-risk-flag",
+      "predictive_entropy": 1.018009901046753,
+      "sample_index": 111,
+      "true_label": "monitor-closely"
+    },
+    {
+      "confidence": 0.447331964969635,
+      "mean_probabilities": [
+        0.14996697008609772,
+        0.447331964969635,
+        0.40270107984542847
+      ],
+      "mutual_information": 0.11203932762145996,
+      "predicted_label": "monitor-closely",
+      "predictive_entropy": 1.0106775760650635,
+      "sample_index": 25,
+      "true_label": "monitor-closely"
+    },
+    {
+      "confidence": 0.511370062828064,
+      "mean_probabilities": [
+        0.1691659688949585,
+        0.31946390867233276,
+        0.511370062828064
+      ],
+      "mutual_information": 0.12409394979476929,
+      "predicted_label": "high-risk-flag",
+      "predictive_entropy": 1.008086919784546,
+      "sample_index": 114,
+      "true_label": "monitor-closely"
+    },
+    {
+      "confidence": 0.4661845564842224,
+      "mean_probabilities": [
+        0.1428157538175583,
+        0.4661845564842224,
+        0.3909996747970581
+      ],
+      "mutual_information": 0.05762702226638794,
+      "predicted_label": "monitor-closely",
+      "predictive_entropy": 1.0008955001831055,
+      "sample_index": 80,
+      "true_label": "monitor-closely"
+    }
+  ]
+}

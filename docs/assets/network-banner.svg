@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Neural Network Banner</title>
+  <desc id="desc">Banner for the deep learning architecture and neural network visualization.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111a26"/>
+      <stop offset="100%" stop-color="#1b1221"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="420" rx="30" fill="url(#bg)"/>
+  <g stroke="#7cc6ff" stroke-opacity="0.22" fill="none">
+    <path d="M190 110 L390 90 L610 120 L825 106 L1020 140"/>
+    <path d="M190 210 L390 188 L610 220 L825 205 L1020 236"/>
+    <path d="M190 310 L390 288 L610 320 L825 306 L1020 336"/>
+  </g>
+  <g fill="#ffffff">
+    <text x="72" y="74" font-size="34" font-family="Georgia, 'Times New Roman', serif" font-weight="700">Deep learning architecture viewer</text>
+    <text x="72" y="114" font-size="22" font-family="Georgia, 'Times New Roman', serif" fill-opacity="0.78">Tabular input, temporal branch, fusion module, and calibrated classifier head</text>
+  </g>
+  <g>
+    <g fill="#4cc9f0">
+      <circle cx="190" cy="110" r="9"/><circle cx="190" cy="160" r="9"/><circle cx="190" cy="210" r="9"/><circle cx="190" cy="260" r="9"/><circle cx="190" cy="310" r="9"/>
+    </g>
+    <g fill="#90be6d">
+      <circle cx="390" cy="90" r="11"/><circle cx="390" cy="140" r="11"/><circle cx="390" cy="190" r="11"/><circle cx="390" cy="240" r="11"/><circle cx="390" cy="290" r="11"/><circle cx="390" cy="340" r="11"/>
+    </g>
+    <g fill="#f9844a">
+      <circle cx="610" cy="120" r="10"/><circle cx="610" cy="170" r="10"/><circle cx="610" cy="220" r="10"/><circle cx="610" cy="270" r="10"/><circle cx="610" cy="320" r="10"/>
+    </g>
+    <g fill="#ffd166">
+      <circle cx="825" cy="106" r="12"/><circle cx="825" cy="168" r="12"/><circle cx="825" cy="230" r="12"/><circle cx="825" cy="292" r="12"/>
+    </g>
+    <g fill="#ff6b6b">
+      <circle cx="1020" cy="140" r="14"/><circle cx="1020" cy="236" r="14"/><circle cx="1020" cy="336" r="14"/>
+    </g>
+  </g>
+  <g fill="#d8e3ea" font-family="Georgia, 'Times New Roman', serif" font-size="20">
+    <text x="148" y="370">Input</text>
+    <text x="344" y="370">Tabular MLP</text>
+    <text x="560" y="370">Temporal</text>
+    <text x="793" y="370">Fusion</text>
+    <text x="973" y="370">Output</text>
+  </g>
+</svg>

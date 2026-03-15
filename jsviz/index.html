@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuro-Inspired Uncertainty Atlas</title>
+    <style>
+      :root {
+        --bg-0: #f6f1e8;
+        --bg-1: #dfe9ef;
+        --panel: rgba(255, 255, 255, 0.8);
+        --panel-strong: rgba(255, 255, 255, 0.92);
+        --line: rgba(19, 35, 47, 0.1);
+        --text: #10212c;
+        --muted: #52636f;
+        --accent-a: #145374;
+        --accent-b: #4f772d;
+        --accent-c: #b85c38;
+        --accent-d: #d9a441;
+        --shadow: 0 24px 64px rgba(16, 33, 44, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, rgba(255, 248, 234, 0.95) 0%, rgba(235, 241, 244, 0.88) 36%, rgba(216, 227, 234, 0.96) 100%),
+          linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 32px 18px 56px;
+      }
+
+      .hero,
+      .panel,
+      .scene-card,
+      .chart-card,
+      .table-card,
+      .heatmap-card,
+      .empty-state {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(10px);
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 30px;
+        margin-bottom: 24px;
+        background:
+          radial-gradient(circle at 20% 0%, rgba(20, 83, 116, 0.14), transparent 35%),
+          radial-gradient(circle at 80% 20%, rgba(184, 92, 56, 0.16), transparent 30%),
+          linear-gradient(135deg, rgba(255, 250, 242, 0.92), rgba(226, 237, 243, 0.96));
+      }
+
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 0.78rem;
+        color: #8c5a2b;
+        margin-bottom: 10px;
+      }
+
+      .hero h1 {
+        margin: 0 0 14px;
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        line-height: 1.02;
+        max-width: 980px;
+      }
+
+      .hero p {
+        margin: 0;
+        max-width: 900px;
+        line-height: 1.7;
+        font-size: 1.06rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 0.9fr;
+        gap: 20px;
+        align-items: start;
+        margin-top: 22px;
+      }
+
+      .hero-note,
+      .hero-links {
+        padding: 18px 20px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(19, 35, 47, 0.08);
+      }
+
+      .hero-note strong {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .hero-action,
+      .scene-action {
+        appearance: none;
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 14px;
+        font: inherit;
+        cursor: pointer;
+        transition: transform 140ms ease, background 140ms ease, color 140ms ease;
+      }
+
+      .hero-action {
+        background: rgba(16, 33, 44, 0.92);
+        color: white;
+      }
+
+      .hero-action.secondary,
+      .scene-action.secondary {
+        background: rgba(20, 83, 116, 0.08);
+        color: var(--accent-a);
+        border: 1px solid rgba(20, 83, 116, 0.14);
+      }
+
+      .hero-action:hover,
+      .scene-action:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero-links ul,
+      .caution-list,
+      .architecture-list {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .hero-links li,
+      .caution-list li,
+      .architecture-list li {
+        margin: 8px 0;
+        color: var(--muted);
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      .metric-card {
+        min-height: 112px;
+        padding: 18px;
+        border-radius: 22px;
+        background: var(--panel-strong);
+        border: 1px solid var(--line);
+      }
+
+      .metric-label {
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: end;
+        margin: 0 0 16px;
+      }
+
+      .section-heading h2,
+      .scene-copy h2,
+      .chart-card h2,
+      .heatmap-card h2,
+      .table-card h2 {
+        margin: 0 0 8px;
+        font-size: 1.25rem;
+      }
+
+      .section-heading p,
+      .scene-copy p,
+      .chart-card p,
+      .heatmap-card p,
+      .table-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .space-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .scene-card {
+        position: relative;
+        padding: 18px;
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      }
+
+      .scene-card.is-focused {
+        transform: translateY(-2px);
+        border-color: rgba(20, 83, 116, 0.28);
+        box-shadow: 0 28px 72px rgba(20, 83, 116, 0.14);
+      }
+
+      .scene-canvas {
+        width: 100%;
+        height: 360px;
+        display: block;
+        border-radius: 22px;
+        background:
+          radial-gradient(circle at top, rgba(20, 83, 116, 0.1), rgba(6, 20, 28, 0.94)),
+          linear-gradient(180deg, rgba(8, 22, 31, 0.98), rgba(12, 14, 24, 1));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 16px;
+      }
+
+      .scene-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .scene-copy {
+        display: grid;
+        gap: 14px;
+      }
+
+      .scene-signature {
+        position: absolute;
+        right: 30px;
+        bottom: 176px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(243, 247, 250, 0.82);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(5, 12, 20, 0.28);
+        pointer-events: none;
+      }
+
+      .scene-signature strong {
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: none;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 0.88rem;
+        background: rgba(20, 83, 116, 0.08);
+        color: var(--accent-a);
+        border: 1px solid rgba(20, 83, 116, 0.14);
+      }
+
+      .chart-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .chart-card,
+      .heatmap-card,
+      .table-card {
+        padding: 18px;
+      }
+
+      .chart-frame {
+        position: relative;
+        min-height: 330px;
+      }
+
+      .wide {
+        grid-column: span 2;
+      }
+
+      .heatmap-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .heatmap {
+        display: grid;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .heatmap-head,
+      .heatmap-row {
+        display: grid;
+        grid-template-columns: 140px repeat(3, minmax(54px, 1fr));
+        gap: 8px;
+        align-items: center;
+      }
+
+      .heatmap-label {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .heatmap-cell {
+        min-height: 54px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        color: white;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 12px 10px;
+        border-bottom: 1px solid rgba(19, 35, 47, 0.08);
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--muted);
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 0.84rem;
+        background: rgba(20, 83, 116, 0.08);
+        color: var(--accent-a);
+      }
+
+      .panel-row {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .panel {
+        padding: 18px;
+      }
+
+      .empty-state {
+        max-width: 760px;
+        margin: 40px auto;
+        padding: 24px;
+      }
+
+      .is-hidden {
+        display: none !important;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      @media (max-width: 1100px) {
+        .hero-grid,
+        .panel-row,
+        .wide {
+          grid-template-columns: 1fr;
+          grid-column: auto;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .shell {
+          padding: 22px 12px 40px;
+        }
+
+        .hero,
+        .scene-card,
+        .chart-card,
+        .table-card,
+        .heatmap-card,
+        .panel {
+          padding: 16px;
+        }
+
+        .scene-canvas {
+          height: 280px;
+        }
+
+        .heatmap-head,
+        .heatmap-row {
+          grid-template-columns: 110px repeat(3, minmax(42px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app" class="shell">
+      <section id="viewer-shell">
+        <header class="hero">
+          <div class="eyebrow">Open research visualization</div>
+          <h1 id="project-title">Neuro-inspired probabilistic deep learning framework</h1>
+          <p>
+            Public HTML interface for exploring calibrated probabilities, predictive uncertainty,
+            neuro-inspired signals, and the topology of the artificial neural network behind the
+            project, making the research navigable directly from the repository.
+          </p>
+
+          <div class="hero-grid">
+            <div class="hero-note">
+              <strong>Responsible use</strong>
+              <ul id="caution-list" class="caution-list"></ul>
+            </div>
+            <div class="hero-links">
+              <strong>Open exploration</strong>
+              <ul>
+                <li>The charts below use only the repository-hosted static payload.</li>
+                <li>Both 3D scenes run directly in the browser, without a live backend.</li>
+                <li>The viewer can be published as a static page for any repository visitor.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="hero-action" data-scroll-target="neuro-space">Open neuroscientific 3D space</button>
+            <button class="hero-action secondary" data-scroll-target="network-space">Open neural network 3D space</button>
+            <button class="hero-action secondary" data-scroll-target="uncertainty-landscape">Jump to charts</button>
+          </div>
+        </header>
+
+        <section id="summary" class="metrics-grid"></section>
+
+        <section>
+          <div class="section-heading">
+            <div>
+              <h2>3D exploration spaces</h2>
+              <p>
+                Two three-dimensional environments inside the same HTML document: one for
+                neuroscientific dynamics and uncertainty metrics, and one for the artificial neural
+                network used by the deep learning model.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-grid">
+            <article id="neuro-space" class="scene-card">
+              <div class="scene-toolbar">
+                <button class="scene-action" data-scene-focus="neuro-space">Focus scene</button>
+                <button class="scene-action secondary" data-scene-fullscreen="neuro-scene">Fullscreen</button>
+              </div>
+              <canvas id="neuro-scene" class="scene-canvas" aria-label="Neuroscientific 3D environment"></canvas>
+              <div class="scene-signature">crafted by <strong>Gabriel Duarte Arantes</strong></div>
+              <div class="scene-copy">
+                <div>
+                  <h2>Neuro-ML uncertainty dome</h2>
+                  <p>
+                    A 3D scene for visualizing signals, risk clusters, and the coupling between
+                    confidence, entropy, and predictive instability in the prototype.
+                  </p>
+                </div>
+                <div id="neuro-chip-row" class="chip-row"></div>
+              </div>
+            </article>
+
+            <article id="network-space" class="scene-card">
+              <div class="scene-toolbar">
+                <button class="scene-action" data-scene-focus="network-space">Focus scene</button>
+                <button class="scene-action secondary" data-scene-fullscreen="network-scene">Fullscreen</button>
+              </div>
+              <canvas id="network-scene" class="scene-canvas" aria-label="Artificial neural network 3D environment"></canvas>
+              <div class="scene-signature">crafted by <strong>Gabriel Duarte Arantes</strong></div>
+              <div class="scene-copy">
+                <div>
+                  <h2>Deep learning network chamber</h2>
+                  <p>
+                    A 3D space dedicated to the classifier architecture: tabular input, temporal
+                    branch, multimodal fusion, and the final probabilistic decision layer.
+                  </p>
+                </div>
+                <ul id="architecture-list" class="architecture-list"></ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="chart-grid">
+          <article class="chart-card">
+            <h2>Mean class probabilities</h2>
+            <p>Mean calibrated class probabilities across the predictive distribution.</p>
+            <div class="chart-frame">
+              <canvas id="probability-chart"></canvas>
+            </div>
+          </article>
+
+          <article class="chart-card">
+            <h2>Mean class variance</h2>
+            <p>Mean class-wise uncertainty estimated by Monte Carlo Dropout.</p>
+            <div class="chart-frame">
+              <canvas id="variance-chart"></canvas>
+            </div>
+          </article>
+
+          <article class="chart-card">
+            <h2>Calibration curves</h2>
+            <p>Observed reliability compared with predicted confidence.</p>
+            <div class="chart-frame">
+              <canvas id="calibration-chart"></canvas>
+            </div>
+          </article>
+
+          <article class="chart-card">
+            <h2>Model comparison radar</h2>
+            <p>Comparison across raw, calibrated, and MC Dropout inference regimes.</p>
+            <div class="chart-frame">
+              <canvas id="comparison-chart"></canvas>
+            </div>
+          </article>
+
+          <article class="chart-card">
+            <h2>Training loss trajectory</h2>
+            <p>Compact training history for the research MVP.</p>
+            <div class="chart-frame">
+              <canvas id="training-loss-chart"></canvas>
+            </div>
+          </article>
+
+          <article class="chart-card">
+            <h2>Validation metrics trajectory</h2>
+            <p>Validation accuracy and macro-F1 across epochs.</p>
+            <div class="chart-frame">
+              <canvas id="validation-chart"></canvas>
+            </div>
+          </article>
+
+          <article id="uncertainty-landscape" class="chart-card wide">
+            <h2>Uncertainty scatter landscape</h2>
+            <p>
+              Each point represents one sample. The X axis shows confidence, the Y axis shows
+              predictive entropy, and marker size tracks mutual information.
+            </p>
+            <div class="chart-frame">
+              <canvas id="uncertainty-chart"></canvas>
+            </div>
+          </article>
+        </section>
+
+        <section class="heatmap-grid">
+          <article class="heatmap-card">
+            <h2>Confusion matrix: raw</h2>
+            <p>Deterministic output before post-hoc calibration.</p>
+            <div id="raw-heatmap" class="heatmap"></div>
+          </article>
+
+          <article class="heatmap-card">
+            <h2>Confusion matrix: calibrated</h2>
+            <p>Output after temperature scaling.</p>
+            <div id="calibrated-heatmap" class="heatmap"></div>
+          </article>
+
+          <article class="heatmap-card">
+            <h2>Confusion matrix: MC Dropout</h2>
+            <p>Mean output under stochastic inference.</p>
+            <div id="mc-heatmap" class="heatmap"></div>
+          </article>
+        </section>
+
+        <section class="panel-row">
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <h2>Architecture snapshot</h2>
+                <p>Text summary of the topology used by the neural network 3D scene.</p>
+              </div>
+            </div>
+            <div id="architecture-chip-row" class="chip-row"></div>
+            <p class="footer-note">
+              This visualization is interpretive and exploratory. It represents the logical
+              multimodal skeleton of the architecture rather than a raw dump of the internal PyTorch graph.
+            </p>
+          </article>
+
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <h2>Repository-ready viewer</h2>
+                <p>Static viewer structure designed for public repository navigation.</p>
+              </div>
+            </div>
+            <div class="chip-row">
+              <span class="chip">Static HTML</span>
+              <span class="chip">Canvas 3D</span>
+              <span class="chip">Chart.js</span>
+              <span class="chip">No live backend</span>
+              <span class="chip" id="device-chip">Device: unknown</span>
+            </div>
+            <p class="footer-note">
+              To refresh the data, regenerate the local payload. The frontend remains accessible even
+              for visitors who only want to explore the repository and understand the model visually.
+            </p>
+          </article>
+        </section>
+
+        <section class="table-card">
+          <h2>Most uncertain samples</h2>
+          <p>
+            The most ambiguous cases under stochastic inference. Interpretation should always combine
+            probability, entropy, and mutual information.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sample</th>
+                  <th>Predicted</th>
+                  <th>True</th>
+                  <th>Confidence</th>
+                  <th>Entropy</th>
+                  <th>MI</th>
+                  <th>Mean probabilities</th>
+                </tr>
+              </thead>
+              <tbody id="uncertainty-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </section>
+
+      <section id="empty-state" class="empty-state is-hidden" aria-live="polite">
+        <h1>Visualization payload unavailable</h1>
+        <p id="empty-message"></p>
+        <p>
+          Run <code>python scripts/run_neuro_risk_mvp.py</code> or
+          <code>python scripts/infer_neuro_risk.py</code> to regenerate
+          <code>jsviz/public/latest_inference.json</code>.
+        </p>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

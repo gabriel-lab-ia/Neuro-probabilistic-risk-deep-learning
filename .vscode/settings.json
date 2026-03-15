@@ -1,0 +1,24 @@
+{
+  "python.defaultInterpreterPath": "/home/agi/deeplearning.py/.venv/bin/python",
+  "python.envFile": "${workspaceFolder}/.env.workspace",
+  "python.terminal.activateEnvironment": true,
+  "jupyter.askForKernelRestart": false,
+  "jupyter.notebookFileRoot": "${workspaceFolder}",
+  "terminal.integrated.cwd": "${workspaceFolder}",
+  "terminal.integrated.env.linux": {
+    "JUPYTER_CONFIG_DIR": "${workspaceFolder}/.jupyter",
+    "JUPYTER_DATA_DIR": "${workspaceFolder}/.jupyter/data",
+    "JUPYTER_RUNTIME_DIR": "${workspaceFolder}/.jupyter/runtime",
+    "IPYTHONDIR": "${workspaceFolder}/.ipython",
+    "MPLCONFIGDIR": "${workspaceFolder}/.cache/matplotlib",
+    "PIP_CACHE_DIR": "${workspaceFolder}/.cache/pip",
+    "PYTHONPYCACHEPREFIX": "${workspaceFolder}/.cache/pycache",
+    "PYTHONPATH": "${workspaceFolder}/src"
+  },
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/src"
+  ],
+  "python-envs.workspaceSearchPaths": [
+    "${workspaceFolder}/.venv"
+  ]
+}
