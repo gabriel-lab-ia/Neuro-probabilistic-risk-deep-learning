@@ -20,6 +20,8 @@ data/external/
 models/
 logs/
 outputs/
+!src/neuro_risk/models/
+!src/neuro_risk/models/*.py
 
 # Local caches
 .cache/
